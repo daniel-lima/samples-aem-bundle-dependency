@@ -1,12 +1,19 @@
 [AEM Samples] Bundle Dependency
 ========
 
-This a content package project generated using the multimodule-content-package-archetype.
+This project demonstrates possible dependency issues when using OSGi bundles and how to solve them.
+For further information, please refer to [Resolving OSGi bundle dependencies](http://danielhalima.com/aem/2016/12/18/resolving-osgi-bundle-dependencies/).
+
+Requirements
+------------
+
+- AEM 6.1
+- [Apache Maven](https://maven.apache.org/) version `>=3.3.9`
 
 Building
 --------
 
-This project uses Maven for building. Common commands:
+The project is based on [multimodule-content-package-archetype](https://docs.adobe.com/docs/en/aem/6-1/develop/dev-tools/vlt-mavenplugin.html#multimodule-content-package-archetype), so it has the same profiles and properties. Some common commands:
 
 From the root directory, run ``mvn -PautoInstallPackage clean install`` to build the bundle and content package and install to a CQ instance.
 

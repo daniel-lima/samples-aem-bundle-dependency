@@ -10,11 +10,14 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
 import org.apache.felix.scr.annotations.Component;
+import org.apache.felix.scr.annotations.Reference;
 import org.apache.felix.scr.annotations.sling.SlingFilter;
 import org.apache.felix.scr.annotations.sling.SlingFilterScope;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.acme.samples.aem.bundledependency.HelloService;
 
 /**
 * Simple servlet filter component that logs incoming requests.
@@ -24,6 +27,9 @@ import org.slf4j.LoggerFactory;
 public class LoggingFilter implements Filter {
     
     private Logger logger = LoggerFactory.getLogger(LoggingFilter.class);
+
+    @Reference
+    private HelloService helloService;
 
     public void init(FilterConfig filterConfig) throws ServletException {
     }
@@ -37,6 +43,8 @@ public class LoggingFilter implements Filter {
                 slingRequest.getRequestPathInfo().getResourcePath(),
                 slingRequest.getRequestPathInfo().getSelectorString());
 
+	logger.debug("[0]: Hello, {}", helloService.getRepositoryName());
+	
         chain.doFilter(request, response);
     }
 

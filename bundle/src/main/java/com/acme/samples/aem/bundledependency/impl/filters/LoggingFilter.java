@@ -2,6 +2,8 @@ package com.acme.samples.aem.bundledependency.impl.filters;
 
 import java.io.IOException;
 
+import java.lang.reflect.InvocationTargetException;
+
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -9,6 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
+import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Reference;
 import org.apache.felix.scr.annotations.sling.SlingFilter;
@@ -43,7 +46,16 @@ public class LoggingFilter implements Filter {
                 slingRequest.getRequestPathInfo().getResourcePath(),
                 slingRequest.getRequestPathInfo().getSelectorString());
 
-	logger.debug("[0]: Hello, {}", helloService.getRepositoryName());
+	try {
+	    Object repositoryName = PropertyUtils.getProperty(helloService, "repositoryName");
+	    logger.debug("[1]: Hello {}", repositoryName);
+	} catch (IllegalAccessException e) {
+	    throw new ServletException(e);
+	} catch (InvocationTargetException e) {
+	    throw new ServletException(e);
+	} catch (NoSuchMethodException e) {
+	    throw new ServletException(e);
+	}
 	
         chain.doFilter(request, response);
     }

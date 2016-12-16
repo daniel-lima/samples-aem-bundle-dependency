@@ -97,6 +97,9 @@
 		      <!-- embed all compile and runtime scope dependencies -->
 		      <Embed-Dependency>*;scope=compile|runtime</Embed-Dependency>
 		      <Embed-Transitive>true</Embed-Transitive>
+		      <!-- Ignoring spring optional dependencies: cglib, net.sf.jopt-simple and org.aspectj -->
+		      <!-- Ignoring commons-logging optional dependencies: avalon-framework -->
+		      <Import-Package>!net.sf.cglib.*,!org.apache.avalon.*,!org.apache.log.*,!joptsimple.*,!org.aspectj.*,*</Import-Package>
                     </instructions>
                 </configuration>
             </plugin>

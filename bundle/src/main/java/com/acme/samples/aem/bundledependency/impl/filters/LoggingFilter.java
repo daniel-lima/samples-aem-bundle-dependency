@@ -3,6 +3,7 @@ package com.acme.samples.aem.bundledependency.impl.filters;
 import java.io.IOException;
 
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -11,7 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
-import org.apache.commons.beanutils.PropertyUtils;
+
 import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Reference;
 import org.apache.felix.scr.annotations.sling.SlingFilter;
@@ -19,6 +20,7 @@ import org.apache.felix.scr.annotations.sling.SlingFilterScope;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 
 import com.acme.samples.aem.bundledependency.HelloService;
 
@@ -47,13 +49,12 @@ public class LoggingFilter implements Filter {
                 slingRequest.getRequestPathInfo().getSelectorString());
 
 	try {
-	    Object repositoryName = PropertyUtils.getProperty(helloService, "repositoryName");
-	    logger.debug("[2]: Hello {}", repositoryName);
+	    Method method = BeanUtils.findDeclaredMethodWithMinimalParameters(HelloService.class, "getRepositoryName");
+	    Object repositoryName = method.invoke(helloService);
+	    logger.debug("[3]: Hello {}", repositoryName);
 	} catch (IllegalAccessException e) {
 	    throw new ServletException(e);
 	} catch (InvocationTargetException e) {
-	    throw new ServletException(e);
-	} catch (NoSuchMethodException e) {
 	    throw new ServletException(e);
 	}
 	

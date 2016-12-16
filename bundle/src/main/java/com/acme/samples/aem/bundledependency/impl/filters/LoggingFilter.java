@@ -48,7 +48,7 @@ public class LoggingFilter implements Filter {
 
 	try {
 	    Object repositoryName = PropertyUtils.getProperty(helloService, "repositoryName");
-	    logger.debug("[1]: Hello {}", repositoryName);
+	    logger.debug("[2]: Hello {}", repositoryName);
 	} catch (IllegalAccessException e) {
 	    throw new ServletException(e);
 	} catch (InvocationTargetException e) {

@@ -89,7 +89,9 @@
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
-                        <Bundle-SymbolicName>com.acme.samples.aem.bundledependency.samples-bundle-dependency-bundle</Bundle-SymbolicName>
+                      <Bundle-SymbolicName>com.acme.samples.aem.bundledependency.samples-bundle-dependency-bundle</Bundle-SymbolicName>
+		      <!-- embed all compile and runtime scope dependencies -->
+		      <Embed-Dependency>*;scope=compile|runtime</Embed-Dependency>
                     </instructions>
                 </configuration>
             </plugin>

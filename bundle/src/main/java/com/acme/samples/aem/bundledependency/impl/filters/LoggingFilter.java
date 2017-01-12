@@ -51,7 +51,7 @@ public class LoggingFilter implements Filter {
 	try {
 	    Method method = BeanUtils.findDeclaredMethodWithMinimalParameters(HelloService.class, "getRepositoryName");
 	    Object repositoryName = method.invoke(helloService);
-	    logger.debug("[5]: Hello {}", repositoryName);
+	    logger.debug("[6]: Hello {}", repositoryName);
 	} catch (IllegalAccessException e) {
 	    throw new ServletException(e);
 	} catch (InvocationTargetException e) {
